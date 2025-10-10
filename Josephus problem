@@ -4,16 +4,16 @@ using namespace std;
 struct node{
     int data;
     node*link;
-}
+};
 int main(){
-    int i, n, val;
-    node*first,*temp,*last;
+    int i, n, val,c,count;
+    node*first,*temp,*last, *back;
     cout<<"Enter the number of soldiers :";
     cin>>n;
     while(n!=1)
     {
-        temp=back->link;
-        c=count;
+        temp = back->link;
+        c = count;
         while(c!=0)
         {
             back=temp;
@@ -26,6 +26,6 @@ int main(){
         delete temp;
         n--;
         temp=back->link;
-        c=count;
+        c = count;
     }
 }
