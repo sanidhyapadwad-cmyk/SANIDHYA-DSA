@@ -1,0 +1,77 @@
+#include <iostream>
+#include <stack>
+#include <string>
+using namespace std;
+
+int main()
+{   
+    string DataType;
+    cout << "Enter the data type of Stack (int, double, string) - ";
+    cin >> DataType;
+
+    if(DataType == "string")
+    {
+        stack<string> st;
+        cout << "Enter no. of elements - ";
+        int n;
+        cin >> n;
+        for(int i = 1; i <= n; i++)
+        {
+            cout << i << "th element - ";
+            string m;
+            cin >> m;
+            st.push(m);
+        }
+        while(!st.empty())
+        {
+            cout << st.top() << " ";
+            st.pop();
+        }
+        cout << endl;
+    }
+    else if(DataType == "int")
+    {
+        stack<int> st;
+        cout << "Enter no. of elements - ";
+        int n;
+        cin >> n;
+        for(int i = 1; i <= n; i++)
+        {
+            cout << i << "th element - ";
+            int m;
+            cin >> m;
+            st.push(m);
+        }
+        while(!st.empty())
+        {
+            cout << st.top() << " ";
+            st.pop();
+        }
+        cout << endl;
+    }
+    else if(DataType == "double")
+    {
+        stack<double> st;
+        cout << "Enter no. of elements - ";
+        int n;
+        cin >> n;
+        for(int i = 1; i <= n; i++)
+        {
+            cout << i << "th element - ";
+            double m;
+            cin >> m;
+            st.push(m);
+        }
+        while(!st.empty())
+        {
+            cout << st.top() << " ";
+            st.pop();
+        }
+        cout << endl;
+    }
+    else
+    {
+        cout << "Invalid data type entered!" << endl;
+    }
+
+}
