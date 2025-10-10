@@ -1,31 +1,66 @@
-#include <iostream>
+#include<iostream>
 using namespace std;
-
-struct node{
-    int data;
-    node*link;
+struct node
+{
+    char data;
+    node *link;
 };
-int main(){
-    int i, n, val,c,count;
-    node*first,*temp,*last, *back;
-    cout<<"Enter the number of soldiers :";
+
+int main()
+{
+    int i,n,count,c;
+    char name;
+    node *first, *last, *temp, *back;
+    cout<<"Enter the number of soldiers - ";
     cin>>n;
-    while(n!=1)
+    first = new node;
+    cout<<"Enter the name of soldier 1 - ";
+    cin>>first->data;
+    first->link = first;
+    temp = first;
+    
+    for(i=1; i<n; i++)
     {
-        temp = back->link;
-        c = count;
-        while(c!=0)
+        last = new node;
+        cout<<"soldier "<<i+1<<" - ";
+        cin>>last->data;
+        last->link = first;
+        temp->link = last;
+        temp = last;
+    }
+    
+    cout<<"\n--- Start the game ---"<<endl;
+    cout<<"Enter the name of soldier - ";
+    cin>>name;
+    cout<<"Enter the count - ";
+    cin>>count;
+    temp = first;
+    c = count;
+    while (temp->data != name)
         {
-            back=temp;
-            temp=temp->link;
+            back = temp;
+            temp = temp->link;
+        }
+    while(n != 1)
+    {
+        while (c != 0)
+        {
+            back = temp;
+            temp = temp->link;
             c--;
         }
-        back->link=temp->link;
-        temp->link=NULL;
-        cout<<temp->data;
+        cout<<temp->data<<" free."<<endl;
+        back->link = temp->link;
+        
+        if (temp == first) {
+            first = temp->link;
+        }
         delete temp;
+        temp = back->link;
         n--;
-        temp=back->link;
         c = count;
     }
+    cout << "\nThe last remaining soldier is: " << temp->data << endl;
+delete temp; // Clean up last remaining node
+
 }
