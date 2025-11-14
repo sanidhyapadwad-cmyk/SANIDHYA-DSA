@@ -1,51 +1,79 @@
-#define MAX 10
 #include <iostream>
 using namespace std;
 
-int Queue[MAX];
-int front = -1, rear=-1;
-void Enqueue(int val)
-{
-    if(rear == MAX - 1)
-    cout<<"Queue is full";
-    else{
-        rear=rear+1;
-        Queue[rear]=val;
-        cout << "insert element"<<Queue [rear]<<endl;
+#define MAX 100  // maximum size of stack
+
+class Stack {
+private:
+    int arr[MAX];
+    int top;
+
+public:
+    Stack() {
+        top = -1; 
     }
-    if (rear==0)
-    front=0;
-}
-void dequeue()
-{
-    if(front==-1)
-    cout<<"Queue is empty";
-    else
-    {
-        cout<<"deleted element"<<Queue[front];
-        if(front==rear)
-        front=rear=rear-1;
-        else
-        front=front+1;
+
+    // Push operation
+    void push(int x) {
+        if (top == MAX - 1) {
+            cout << "Stack Overflow!" << endl;
+            return;
+        }
+        arr[++top] = x;
+        cout << x << " pushed to stack" << endl;
     }
-}
-void peek()
-{
-    if(front==-1)
-    cout<<"Queue is empty";
-    else{
-        cout<<"front element is"<<Queue[front]<<endl;
-        cout<<"rear element is"<<Queue[rear]<<endl;
-        
+
+    // Pop operation
+    void pop() {
+        if (top == -1) {
+            cout << "Stack Underflow!" << endl;
+            return;
+        }
+        cout << arr[top--] << " popped from stack" << endl;
     }
-}
-int main()
-{
-    Enqueue(10);
-    Enqueue(20);
-    Enqueue(30);
-    peek();
-    dequeue();
-    peek();
+
+    // Peek operation
+    int peek() {
+        if (top == -1) {
+            cout << "Stack is empty!" << endl;
+            return -1;
+        }
+        return arr[top];
+    }
+
+    // Display stack
+    void display() {
+        if (top == -1) {
+            cout << "Stack is empty!" << endl;
+            return;
+        }
+        cout << "Stack elements: ";
+        for (int i = top; i >= 0; i--) {
+            cout << arr[i] << " ";
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    Stack st;
+    int n, value;
+
+    cout << "Enter number of elements to push: ";
+    cin >> n;
+
+    for (int i = 1; i <= n; i++) {
+        cout << "Enter value " << i << ": ";
+        cin >> value;
+        st.push(value);
+    }
+
+    st.display();
+
+    cout << "Perform pop operation..." << endl;
+    st.pop();
+
+    st.display();
+
     return 0;
 }
