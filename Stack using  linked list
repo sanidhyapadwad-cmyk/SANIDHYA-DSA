@@ -1,0 +1,92 @@
+#include <iostream>
+using namespace std;
+
+// Node structure for Linked List
+struct Node {
+    int data;
+    Node* next;
+};
+
+// Stack class using Linked List
+class Stack {
+private:
+    Node* top;
+
+public:
+    // Constructor to initialize the stack
+    Stack() {
+        top = nullptr;
+    }
+
+    // Push operation
+    void push(int value) {
+        Node* newNode = new Node();  // Create new node
+        if (newNode == nullptr) {
+            cout << "Memory allocation failed!" << endl;
+            return;
+        }
+        newNode->data = value;
+        newNode->next = top;
+        top = newNode;  // Move the top to the new node
+        cout << value << " pushed to stack" << endl;
+    }
+
+    // Pop operation
+    void pop() {
+        if (top == nullptr) {
+            cout << "Stack Underflow!" << endl;
+            return;
+        }
+        Node* temp = top;
+        cout << top->data << " popped from stack" << endl;
+        top = top->next;  // Move top to the next node
+        delete temp;  // Free memory
+    }
+
+    // Peek operation
+    int peek() {
+        if (top == nullptr) {
+            cout << "Stack is empty!" << endl;
+            return -1;
+        }
+        return top->data;  // Return top element
+    }
+
+    // Display the stack
+    void display() {
+        if (top == nullptr) {
+            cout << "Stack is empty!" << endl;
+            return;
+        }
+        cout << "Stack elements: ";
+        Node* temp = top;
+        while (temp != nullptr) {
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    Stack st;
+    int n, value;
+
+    cout << "Enter number of elements to push: ";
+    cin >> n;
+
+    for (int i = 1; i <= n; i++) {
+        cout << "Enter value " << i << ": ";
+        cin >> value;
+        st.push(value);
+    }
+
+    st.display();
+
+    cout << "Perform pop operation..." << endl;
+    st.pop();
+
+    st.display();
+
+    return 0;
+}
