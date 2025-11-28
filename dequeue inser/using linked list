@@ -1,0 +1,91 @@
+#include <iostream>
+using namespace std;
+
+// Node structure for the linked list
+class Node {
+public:
+    int data;
+    Node* next;
+
+    Node(int value) {
+        data = value;
+        next = nullptr;
+    }
+};
+
+// Queue class
+class Queue {
+private:
+    Node* front;
+    Node* rear;
+
+public:
+    Queue() {
+        front = nullptr;
+        rear = nullptr;
+    }
+
+    // Enqueue operation
+    void enqueue(int value) {
+        Node* newNode = new Node(value);
+
+        // If queue is empty
+        if (rear == nullptr) {
+            front = rear = newNode;
+            return;
+        }
+
+        rear->next = newNode;
+        rear = newNode;
+    }
+
+    // Dequeue operation
+    int dequeue() {
+        if (front == nullptr) {
+            cout << "Queue is empty!" << endl;
+            return -1;
+        }
+
+        Node* temp = front;
+        int removedValue = temp->data;
+        front = front->next;
+
+        // If queue becomes empty
+        if (front == nullptr) {
+            rear = nullptr;
+        }
+
+        delete temp;
+        return removedValue;
+    }
+
+    // Peek operation
+    int peek() {
+        if (front == nullptr) {
+            cout << "Queue is empty!" << endl;
+            return -1;
+        }
+        return front->data;
+    }
+
+    // Check if queue is empty
+    bool isEmpty() {
+        return front == nullptr;
+    }
+};
+
+// Example usage
+int main() {
+    Queue q;
+
+    q.enqueue(10);
+    q.enqueue(20);
+    q.enqueue(30);
+
+    cout << "Dequeued: " << q.dequeue() << endl; // 10
+    cout << "Front element: " << q.peek() << endl; // 20
+
+    cout << "Is empty? " << (q.isEmpty() ? "Yes" : "No") << endl;
+
+    return 0;
+}
